@@ -36,7 +36,6 @@ export const config: Config = {
     chromeOptions: {
       args: [
         '--disable-gpu',
-        '--headless',
         '--no-sandbox',
         '--window-size=1920,1200',
         '--disable-background-timer-throttling',
@@ -97,6 +96,9 @@ export const config: Config = {
     ]),
     secrets: suite([
       'tests/secrets.scenario.ts',
+    ]),
+    storageclass: suite([
+      'tests/storageclass.scenario.ts',
     ]),
     crud: suite([
       'tests/crud.scenario.ts',
