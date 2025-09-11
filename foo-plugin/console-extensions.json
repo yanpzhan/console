@@ -1,0 +1,38 @@
+/**
+ * This file declares all extensions contributed by the plugin.
+ *
+ * Depending on extension 'type', the 'properties' object may contain code references, encoded
+ * as object literals { $codeRef: string }. The '$codeRef' value should be formatted as either
+ * 'moduleName.exportName' (referring to a named export) or 'moduleName' (referring to the
+ * 'default' export). Only the plugin's exposed modules may be used in code references.
+ */
+[
+  {
+    "type": "console.navigation/section",
+    "properties": {
+      "id": "foo-section",
+      "perspective": "admin",
+      "name": "Foo Plugin Section"
+    }
+  },
+  {
+    "type": "console.navigation/href",
+    "properties": {
+      "id": "admin-dynamic-route-1",
+      "perspective": "admin",
+      "section": "foo-section",
+      "name": "%plugin__console-demo-plugin~Dynamic Nav 1%",
+      "href": "/dynamic-route-1"
+    }
+  },
+  {
+    "type": "console.page/route",
+    "properties": {
+      "exact": true,
+      "path": ["/dynamic-route-1"],
+      "component": {
+        "$codeRef": "exampleNavs.DynamicPage1"
+      }
+    }
+  }
+]
