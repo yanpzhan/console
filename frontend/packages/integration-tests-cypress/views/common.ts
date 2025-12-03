@@ -1,3 +1,6 @@
+import { listPage } from './list-page';
+import * as yamlEditor from './yaml-editor';
+
 export const resourceStatusShouldContain = (desiredStatus: string, options?: any) =>
   cy.contains('[data-test="status-text"]', desiredStatus, options);
 
@@ -27,3 +30,14 @@ export const projectDropdown = {
 };
 
 export const isLocalDevEnvironment = Cypress.config('baseUrl').includes('localhost');
+export const createResourceWithDefaultYAML = (resourceType: string, namespace?: string) => {
+  if (namespace) {
+    cy.visit(`/k8s/ns/${namespace}/${resourceType}`);
+  } else {
+    cy.visit(`/k8s/cluster/${resourceType}`);
+  }
+  listPage.clickCreateYAMLbutton();
+  cy.byTestID('resource-sidebar').should('exist');
+  yamlEditor.isLoaded();
+  yamlEditor.clickSaveCreateButton();
+};
